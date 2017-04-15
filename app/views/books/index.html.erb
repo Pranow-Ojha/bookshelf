@@ -1,0 +1,13 @@
+<% title 'The Books' %>
+
+
+<% for book in @books do %>
+  <h2><%=link_to(book.title,book_path(book)) %></h2>
+  <p><%= image_tag(book.image.small_thumb.url, alt: 'Image') if book.image? %></p>
+  <p><%= book.thoughts %></p>
+<% end %>
+<%= will_paginate @books %>
+
+<p>
+Admin actions: <%= link_to 'New Book', new_book_path%>
+</p>

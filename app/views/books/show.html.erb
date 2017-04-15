@@ -1,0 +1,30 @@
+<% title @book.title %>
+ 
+ <%= link_to(image_tag(@book.image.thumb.url, alt: 'Image'), @book.image.url, target: '_blank') if @book.image? %>
+<!-- <h2><%#=link_to(h(@book.title), book_path(@book)) %></h2> -->
+<p><%= @book.thoughts %></p>
+
+<%if @comment%>
+<h3>COMMENTS</h3>
+	<%for comment in @comment%>
+	<p><strong><%=comment.author%></strong>:<%=comment.text%></p>
+	<%end%>
+	<%= will_paginate @comment %>
+<%end%>
+
+<h3>Post your comment</h3>
+<%=form_for([@book, Comment.new]) do |form| %>
+<p><%=form.label :author%></p>
+<p><%=form.text_field :author%></p>
+
+<p><%=form.label :text%></p>
+<p><%=form.text_area :text%></p>
+
+<%= form.submit 'Save' %>
+<%end%>
+
+<p>
+  Admin Actions: 
+  <%= link_to 'Edit', edit_book_path(@book) %> |
+  <%= link_to 'Delete',book_path(@book),:method=>:delete, :confirm => "Are you sure?" %>
+</p>

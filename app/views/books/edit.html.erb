@@ -1,0 +1,34 @@
+<% title "Editing #{@book.title}" %>
+
+<%= form_for(@book) do |form| %>
+  <p>
+    <%= form.label :title %><br/>
+    <%= form.text_field :title %>
+  </p>
+ 
+  <p>
+    <%= form.label :thoughts %><br/>
+    <%= form.text_area :thoughts %>
+  </p>
+
+  <p>
+  	<% if @book.image? %>
+    <%= image_tag @book.image.thumb.url %>
+    <div>
+    	<%= label_tag :remove_image do%>
+    	Delete Image
+    	<%= form.check_box :remove_image%>
+    	<% end %> 
+    </div>
+    <% end %>
+  </p>
+  <div>
+ 	<%= form.label :image%>
+ 	<%= form.file_field :image%>
+ 	<%= form.hidden_field :image_cache%>
+ </div>
+ <br>
+ <div>
+  <%= form.submit %>
+ </div>
+<% end %>
