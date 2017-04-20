@@ -1,4 +1,6 @@
 class BooksController < ApplicationController
+	
+	before_action :authenticate_user!, :except => [:index]
 
 	def index
 		@books = Book.paginate :page => params[:page], :per_page => 10

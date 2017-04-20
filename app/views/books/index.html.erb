@@ -8,6 +8,9 @@
 <% end %>
 <%= will_paginate @books %>
 
+<% if user_signed_in? && current_user.role=='admin' %>
 <p>
 Admin actions: <%= link_to 'New Book', new_book_path%>
 </p>
+<% else %>
+<% end %>
