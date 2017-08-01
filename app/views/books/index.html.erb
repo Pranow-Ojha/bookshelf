@@ -2,9 +2,19 @@
 
 
 <% for book in @books do %>
-  <h2><%=link_to(book.title,book_path(book)) %></h2>
-  <p><%= image_tag(book.image.small_thumb.url, alt: 'Image') if book.image? %></p>
-  <p><%= book.thoughts %></p>
+	<div class="gallery">
+	  <div class="desc"><b><%=link_to(book.title,book_path(book)) %></b></div>
+	  <%= image_tag(book.image.small_thumb.url, alt: 'Image') if book.image? %>
+	  <div class="desc">
+	  	<%= truncate book.thoughts, length: 160 %>
+        <%= link_to 'read more', book_path(book) %>
+         <p style="color:red"><b>Price:<%= number_to_currency book.price, unit: "R$"%></p>
+        <div class= "add_cart_btn">
+        <%=link_to 'Add to Cart' , :controller => :cart, :action => :add, :id => book%>
+        
+        </div>
+	  </div>
+	</div>
 <% end %>
 <%= will_paginate @books %>
 

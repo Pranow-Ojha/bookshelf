@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   
+  # get 'cart/add'
+
+  get 'cart/index'
+
   get 'pages/home'
 
   get 'pages/about'
@@ -33,6 +37,9 @@ end
   resources :comments ,:only => :create
   end
 
+# map.connect ":controller/:action/:id"
+match ':controller/:action/:id(.:format)' , via: [:get, :post]
+#match 'cart/:id', controller: 'cart', action: 'add', via: [:get, :post]
 
 
 end

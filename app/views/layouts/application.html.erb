@@ -2,17 +2,22 @@
 <html>
   <head>
      <div class="topnav" id="myTopnav">
-        <%=  link_to (image_tag("layouts/images.png", height:50)),"/"%>
-        <a href="#home">Home</a>
+        <%=  link_to (image_tag("layouts/images.png", height:50)),"/books"%>
+        <a href="/books">Home</a>
         <a href="#news">News</a>
         <a href="#contact">Contact</a>
         <a href="#about">About</a>
+        <%=  link_to (image_tag("favicons/kart.png", height:40)),"/"%>
+
 
         <% if user_signed_in? %>
-        <a href="#about" :disable=:true><%=current_user.email %></a>
-        <%= link_to 'Sign out', destroy_user_session_path, :method=>'delete' %>
+        <a href="#about" :disable=:true style="float:right"><%=current_user.email %></a>
+        <%#= link_to 'Sign out', destroy_user_session_path, :method=>'delete' %>
+        <%= link_to (image_tag("favicons/logout1.png")),destroy_user_session_path, :method=>'delete',:style=> "float:right"%>
+
         <% else %>
-        <%= link_to "Log in",  user_session_path %>
+        <%#= link_to "Log in",  user_session_path %>
+        <%= link_to (image_tag("favicons/login.png")),user_session_path, :style=> "float:right"  %>
         <%#= link_to "Sign up", user/sign_in %>
         <%end%>
      </div>
@@ -24,11 +29,18 @@
   </head>
   <body>
     <div id="container">
+      
+      <div id= "wrapper">
+
       <% flash.each do |name, msg| %>
-        <%= content_tag :div, msg, :id => "flash_#{name}" %>
+      <%= content_tag :div, msg, :id => "flash_#{name}" %>
       <% end %>
       <%= content_tag :h1, yield(:title) if show_title? %>
+
+
       <%= yield %>
+
+      </div><!-- END of wrapper -->
       &nbsp;
     </div>
     &nbsp;
